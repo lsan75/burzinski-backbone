@@ -1,0 +1,442 @@
+/*
+Theme Name: Burzinski Backbone
+Theme URI: http://www.burzinskimusic.com
+Author: Burzinski
+Author URI: http://www.burzinskimusic.com
+Description: Burzinski official website
+Version: 3
+License: copyright 2012 burzinski
+License URI: Octobre Insolite
+Tags: responsive backbone soundmanager soundcloud json-api one-page
+*/
+
+	/* std */
+	
+		html {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			background:#fff;
+		}
+		body {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			font-family: 'Source Sans Pro', arial, sans-serif;
+			font-weight: 400;
+			font-size: 0.9em;
+			color:#333;
+		}
+		a, .submit {
+			color: #333;
+			text-decoration: none;
+			transition-property: all;
+			-moz-transition-property: all;
+			-webkit-transition-property: all;
+			-o-transition-property: all;
+			transition-duration: 250ms;
+			-moz-transition-duration:  250ms;
+			-webkit-transition-duration:  250ms;
+			-o-transition-duration:  250ms;
+			border: 0;
+		}
+		img { border: 0; height: auto; width: 100%; max-width: 100%; }
+		img.wp-smiley { width: auto; position:relative; top:0.18em; }
+		
+		.gallery a {
+			display: inline-block;
+			margin:0 5% 3% 0;
+			width:30%;
+		}	
+		.gallery a:nth-child(3n+0){
+			margin-right: 0;
+		}
+		
+		ul {
+			display: inline-block;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+		}	
+		header hgroup {
+			width:100%;
+			background: black;
+			margin: 0;
+			padding: 0;
+			font-size: 0;
+		}
+		h2, nav {
+			margin: 0;
+		}
+		nav, .footer {
+			text-align: center;
+		}
+		p { clear: both; }
+		h1 {
+			margin: 0 auto;
+		}
+		article, nav {
+			margin: 0 auto;
+		}
+		article {
+			margin-bottom: 8em;
+		}
+		section article {
+			opacity: 0;
+		}
+		aside {
+			display: inline-block;
+			vertical-align: top;
+		}
+		article div, .submenu div {
+			display: inline-block;
+			vertical-align: top;
+			overflow: hidden;
+		}
+		#ok:hover { cursor: pointer; }
+	/* fin std */
+		
+	/* sizes */
+		h1 { max-width: 960px; font-size: 0; }
+		h1 a { font-size: 0; }
+		article, .submenu {
+			max-width: 900px;
+			padding: 0 3.125%;
+		}
+		aside {
+			width: 44.5%;
+		}
+		article  img {
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+		}
+		article div, .submenu div {
+			width: 44.5%;
+			margin-left: 11%;
+		}
+		article div div {
+			width: 100%;
+			margin: 0;
+		}
+		.submenu aside label {
+			padding: 6px 0 0 50px;
+			background-repeat: no-repeat;
+			background-position: 10px -10px;
+		}	
+					
+		.submenu aside input#email 	{ width: 49%;  }
+		.submenu aside input 		{ padding: 5px 10px; margin-left: 10px; }
+
+		.menu {
+			position: relative;
+			width: 100%;
+			z-index: 1000;
+			top: 0; left: 0;
+		}
+		.menu ul 	{ margin-left: 40px; }
+		.menu a 	{ margin-right: 40px; }
+		.menu a.active, .menu a:hover, .submenu a:hover, section article p a:hover {
+			color:#d10019;
+		}
+		section article p a {
+			text-decoration: underline;
+		}
+		
+		@media screen and (min-width:620px) and (max-width: 959px) {
+			.submenu aside input#email 	{ width: 30%;  }
+			.submenu aside input 		{ padding: 5px 5px; }
+			
+			.submenu div span { width: 57%; }
+		}
+		@media screen and (min-width:480px) and (max-width: 619px) {
+			.menu ul 	{ margin-left: 20px; }
+			.menu a 	{ margin-right: 20px; }	
+			.submenu aside, .submenu div { display: block; width: 100%; }	
+			.submenu aside input#email 	{ width: 54%;  }
+			.submenu div { margin: 25px 0 0; }
+			article div{
+				width: 55%;
+				margin-left: 5%;
+			}
+			article div div{ width:100%; margin:0; }
+			article aside {
+				width: 40%;
+			}
+		}
+		@media screen and (min-width:280px) and (max-width:479px) {
+			article div{ width: 100%; margin: 0; }
+			article aside { display: none; }
+			.submenu aside, .submenu div { display: block; width: 100%; }	
+			.submenu div { margin: 25px 0 0; }
+			.submenu aside input#email 	{ width: 30%;  }
+			.submenu aside input 		{ padding: 5px 5px; }
+			.menu ul 	{ margin-left: 10px; }
+			.menu a 	{ margin-right: 10px; font-size:0.8em; }	
+
+			.submenu div span { width: 57%; }
+		}
+		@media screen and (max-width:279px) {
+			article div{ width: 100%; margin: 0; }
+			article aside { display: none; }
+			.submenu aside, .submenu div { display: block; width: 100%; }	
+			.submenu div { margin: 25px 0 0; }
+			.submenu aside label {
+				padding: 6px 0 0 40px;
+				background-position: 5px -10px;
+			}	
+			.submenu aside input#email 	{ width: 30%;  }
+			.submenu aside input 		{ padding: 5px 5px; margin-left: 5px; }
+			.menu ul 	{ margin-left: 10px; }
+			.menu a 	{ margin-right: 10px; font-size:0.8em; }	
+
+			.submenu div span { width: 50%; }
+		}
+		
+	/* fin sizes */
+		
+	/* article */
+	article p {
+		line-height:1.5em;
+		margin: 0 0 2em;
+		text-align: justify;
+	}	
+	article cite { 
+		display: inline-block;
+		width: 30%;
+		vertical-align: top;
+		text-align: right; 
+		padding-top: 7px;
+		font-style: normal;
+		color:#777;
+		font-size:0.8em;
+	}
+	article h2 { width: 70%; display: inline-block; margin-bottom: 1.25em; }
+	
+	/* contact form */
+	section form span {
+		display: block;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		padding: 10px;
+	}
+	section form label { 
+		display:inline-block;
+		padding: 0 0 0.5em 10px;
+	}
+	section form label.invalid {
+		color:#d10019;
+		padding: 0.5em 0 0 10px;
+	}
+	section form span input, section form span textarea {
+		display: block;
+		border: 0;
+		width: 100%;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		padding: 5px 10px;
+		font-size: 1em;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	section form span textarea {
+		height:8em;
+	}
+	section form .submit {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		display:block;
+		border: 0;
+		padding:10px 0;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		color: white;
+		margin: 0 auto;
+		width: 30%;
+		font-size: 1em;
+		font-family: 'Source Sans Pro', arial, sans-serif;
+		font-weight: 300;
+		letter-spacing: 0.1em;
+	}
+	section form .submit:hover {
+		color:#d10019;
+		cursor: pointer;
+	}		
+	section form strong {
+		display: block;
+		text-align: center;
+		margin-bottom: 2em;
+	}
+	/* sub menu */
+		.submenu {
+			margin-top: 1.5em;
+			margin-bottom: 4.5em;
+		}
+		.submenu aside, .player {
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			padding: 10px 0;
+			text-align: left;
+		}
+		.submenu aside label {
+			display: inline-block;
+			background-image: url(img/icon-sprites.png);
+			height: 24px;
+			color: white;
+			font-weight: 300;
+		}
+		.player span {
+			color: white;
+			font-weight: 300;
+			display: inline-block;
+			margin-left: 10px;
+			/*overflow: hidden; ne marche pas avec FF */
+			white-space:nowrap; 
+			text-overflow: ellipsis;
+		}
+		.player a {
+			display: inline-block;
+			background-image: url(img/icon-sprites.png);
+			height: 24px;
+			color: white;
+			font-weight: 300;
+			background-repeat: no-repeat; 
+			width: 30px; 
+			padding-top:6px;
+			text-decoration: none;
+		}
+		.player a.player-prev {
+			margin-left: 10px;
+		}
+		.player a:hover { opacity:0.6; }
+		.player a.player-play 	{ background-position: 0 -60px; }			
+		.player a.player-stop 	{ background-position: 0 -560px; }			
+		.player a.player-next 	{ background-position: 0 -610px; }			
+		.player a.player-prev 	{ background-position: 0 -660px; }
+
+		.submenu aside input {
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			border-radius: 10px;
+			background: #fff;
+			border: 0;
+			display: inline-block;
+			font-size: 1em;
+			color:#333;
+		}
+	/* fin sub menu */
+		
+	/* menu + footer bg */
+		.footer ul { margin-left: 5px; }
+		.menu a {
+			color: #fff;
+			text-transform: uppercase;
+			font-weight: 300;
+			letter-spacing:0.1em;
+		}
+		.menu, .footer, .submenu aside, .player, section form span, section form .submit {
+			background: rgb(0,0,0); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(0,0,0,1) 0%, rgba(69,72,77,1) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,1)), color-stop(100%,rgba(69,72,77,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(0,0,0,1) 0%,rgba(69,72,77,1) 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#45484d',GradientType=0 ); /* IE6-9 */
+		}
+		.menu { 
+			padding: 18px 0 17px;
+		}
+		.footer {
+			position: fixed;
+			z-index: 1000;
+			bottom: 0; 
+			width: 100%;
+			padding: 10px 0 9px; 
+		}
+
+	/* footer + icons */
+		.footer a {
+			display: inline-block;
+			background-image: url(img/icon-sprites.png);
+			background-repeat: no-repeat;
+			width: 30px;
+			height: 30px;
+			margin-right: 5px;
+		}
+		.footer a:hover {
+			opacity: 0.6;
+		}
+		#rss 		{ background-position: 0 -110px; }
+		#facebook 	{ background-position: 0 -160px; }
+		#twitter 	{ background-position: 0 -210px; }
+		#youtube 	{ background-position: 0 -260px; }
+		#soundcloud { background-position: 0 -310px; }
+		#lastfm 	{ background-position: 0 -360px; }
+		#deviantart { background-position: 0 -410px; }
+		#tumblr 	{ background-position: 0 -460px; }
+		#pinterest 	{ background-position: 0 -510px; }
+		#top {
+			background:url('img/icons/top.png') no-repeat;
+		}
+	/* fin icons */
+
+	/* video et embed */
+		.video {
+			position: relative;
+			padding-bottom: 56.25%;
+			padding-top: 30px;
+			height: 0;
+			overflow: hidden;		
+			z-index: 1;
+		}
+		.video iframe
+		{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+		}	
+	/* album tracklist */
+		.album { margin: 0 0 2em 1.8em; }
+		.album li {
+			list-style-type:decimal-leading-zero;
+			display: block;
+			padding: 0 0 0.5em;
+			display: list-item;
+			margin: 0;
+		}
+		.album a.active, .album a:hover { text-decoration: underline; }
+		
+	/* social media buttons */
+		article footer .twitter-button{
+			float: left;
+			height: 20px;
+			width: 60px;
+			margin-right: 5px;
+		}
+		article footer .fb_iframe_widget { 
+			float: left; 
+			margin: 0;
+			width:100px;
+		}
+		article footer .nbcomments { text-decoration: underline; }
+		article footer .fb { margin:0 0 3.2em; width: 100%; }
+		article footer .fb div { width: auto; }
+	/* facebook comments */
+	article .fb-comments, article .fb-comments * {width: 100% !important; margin: 0; }	
+	.nbcomments { float: right; }
+	.fb-comments-count { text-decoration: underline; color:#333; }

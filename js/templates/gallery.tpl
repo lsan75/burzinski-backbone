@@ -1,0 +1,1 @@
+<% _.each(collection, function(res) { %><a href="#1" title="photo"><img alt="photo" src="/wp-content/uploads/<%= res.img %>"></a><% }); %>

@@ -1,0 +1,43 @@
+	/* ie bugs */
+		.ie * { zoom: 1; }
+		.ie67 ul, .ie67 li, 
+		.ie67 aside, .ie67 article div,  .ie67 .submenu div,
+		.ie67 article cite, .ie67 article h2
+		{ display: inline; }
+		
+		.ie h1 {width: 960px; }
+		.ie article, .ie .submenu {
+			width: 900px;
+			padding: 0 30px;
+		}
+		.ie .submenu aside, .ie article aside {
+			width: 400px;
+		}
+		.ie article div, .ie .submenu div {
+			width: 400px;
+			margin-left: 100px;
+		}
+		.ie .submenu aside input#email 	{ width: 150px;  }
+		.ie .submenu aside input 		{ padding: 5px 10px; }
+		.ie8 img { width: 100%; height: 100%; }
+		.ie form { margin: 0; }
+		.ie67 .submenu aside input#ok { padding: 3px 10px; }
+		.ie8 h1 { height: 200px; }
+
+
+		.ie .player span {
+			display: inline;
+			width: auto;
+		}
+		.ie67 .player span { vertical-align: top; padding-top: 6px; }
+		.ie6 .footer { position: static; }
+		
+		.ie67 .gallery a {
+			display: inline;
+			margin:0 3% 2% 0;
+			width:30%;
+		}	
+		.ie8 .gallery a { margin:0 3% 2% 0;}
+
+		.ie67 .album li { list-style-type: square; }
+	/* ie bugs */
