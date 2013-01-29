@@ -440,3 +440,9 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 	article .fb-comments, article .fb-comments * {width: 100% !important; margin: 0; }	
 	.nbcomments { float: right; }
 	.fb-comments-count { text-decoration: underline; color:#333; }
+	
+	#ajax-loader {
+		background: url(img/ajax-loader.gif) no-repeat center center;
+		height:32px;
+		width: 100%;
+	}

@@ -28,15 +28,18 @@ function($, Backbone, _, template, PlayerCollection){
 		  		url: 'http://api.soundcloud.com/resolve.json?url=https://soundcloud.com/burzinski/sets/'+ this.media +'&client_id=9a6dee35d2554511e23c08291d16aad8',
   				dataType: "jsonp",
   				success: function(data) {
-  				  				  				  				
-  					_.each(data.tracks, function(res){
+  				  				  			
+  				  	var i = 0;
+  				  	var lng = data.tracks.length;
+  				  	
+  				  	for( ; i < lng ; i++){			  				  				
 
   						that.collection.add({
-  							songid: res.id,
-  							ttl: 	res.title
+  							songid: data.tracks[i].id,
+  							ttl: 	data.tracks[i].title
   						}); 
 
-  					});
+  					}
   					
 					$.when(that.render()).done(function(){
 						return true;
@@ -47,9 +50,7 @@ function($, Backbone, _, template, PlayerCollection){
 		},
 		
 		'render': function(){
-			
-			var that=this;
-			
+						
 			this.template = _.template( template, {collection: this.collection.toJSON() } );	
 			
 			$(this.el).html(this.template);
@@ -65,7 +66,6 @@ function($, Backbone, _, template, PlayerCollection){
 			}	
 		
 		}
-		
 		
 	});
 	

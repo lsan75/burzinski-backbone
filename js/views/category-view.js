@@ -11,19 +11,52 @@ function($, Backbone, _, PostView){
 
 			_.bindAll(	this, 
 						'isNewPage', 
-						'getPage', 
 						'render'
 			);
 						
 			this.slug = options.slug; // recup type de catégorie
 			this.player = options.player;
 			this.id = options.slug+'-content';
-			 // load data
-
-								
+				
+			// filter collection by category
+			this.data = [];
+			this.nbPages = 0;
+			
+			var i = 0,
+				lng = this.collection.length,
+				p,
+				pg, 
+				j,jlng;
+						
+			while ( i < lng ){
+			
+				p=0;
+				
+				pg = [];
+				while ( p < 5 && i < lng){
+										
+					jlng = this.collection.models[i].attributes.cat.length;
+					for( j=0 ; j < jlng ; j++){				
+						if(this.collection.models[i].attributes.cat[j].slug === this.slug){
+							pg.push(this.collection.models[i]);
+							p++;
+						}
+					}
+					
+					i++;
+				}	
+				if(pg.length !== 0){
+					this.data.push(pg);
+					this.nbPages++;
+				}	
+			}	
+																									
 		},
 		
 		'isNewPage': function(){ // handle scroll to next page
+
+			var that = this;
+
 			var isScrolling = null;
 			if( _.isiPhone() ){
 				isScrolling = ($(window).scrollTop() >= ($(document).height() - $(window).height() - 60) );
@@ -33,56 +66,46 @@ function($, Backbone, _, PostView){
 			
 			if(isScrolling)
 	        {
-	            this.getPage(++this.currentPage); // get next page
+				$(window).unbind('scroll', this.isNewPage); // unbind if scrolled again
+	        	this.currentPage++;
+	            $.when(this.render()).done(function(){ // get next page
+	            	$(window).bind('scroll', that.isNewPage); // bind again after render
+	            });	
+
 	        }
 		
 		},
 		
-		'getPage': function(){ // get 5 articles - count=5
-			
-			var that = this;
-		
-			return $.ajax({ // load 5 articles
-  				url: '/api/get_category_posts?slug='+this.slug+'&page='+this.currentPage+'&count=5&custom_fields=url,image',
-  				dataType: "json",
-  				success: function(data) {
-
-  					if(data.status !=='error' ){ 					
-						$.when(that.render(data)).done(function(){
-							return true;
-						});
-					}
-  					
-  				}
-  			});	
-  			
-		},
-		
-		'render': function(data){ // render 5 articles
+		'render': function(dfd){ // render 5 articles
 
 			var that = this;
 			var tempView = null;
 						
-			if(this.currentPage >= data.pages){ // unbind scroll si plus de pages à accéder
-				$(window).unbind('scroll', this.isNewPage);
-				$(window).unbind('touchmove', this.isNewPage);
-			}
-			
-			if( $('#'+this.id).length === 0 ){
-				this.template = '<section id="'+this.id+'"></section>';
-				$('body header').after( this.template );
-			}
-			
-  			_.each(data.posts, function(res) {
+			if( this.data.length === 0 ){
 
-  				tempView = new PostView({'parent': that.id, 'id': that.slug+'-'+res.slug, 'slug': res.slug, 'category': that.slug, 'player': that.player});
-  				tempView.render(res);
-  				
-  			});
-  			
-  			return true;
+	  			return dfd.reject(); // not found
+			
+			}else{			
+															
+				if( $('#'+this.id).length === 0 ){
+					this.template = '<section id="'+this.id+'"></section>';
+					$('body header').after( this.template );
+				}
+			
+				var i=0;
+				var lng = this.data[this.currentPage-1].length;
+				var data;
+				var sdfd = [];
+				
+				for( ; i < lng ; i++ ){	
+					sdfd[i] = $.Deferred();
+					data = this.data[this.currentPage-1][i];
+  					tempView = new PostView({'parent': that.id, 'id': that.slug+'-'+data.get('slug'), 'slug': data.get('slug'), 'category': that.slug, 'player': that.player});
+  					tempView.render(data, sdfd[i]);
+  				}
+  			}
+  			return dfd.resolve();
 		}
-		
 		
 	});
 	

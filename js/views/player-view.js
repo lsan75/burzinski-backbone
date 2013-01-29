@@ -35,23 +35,26 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 		
 		'loadCollection': function(slug){
 		
-			var that = this;
+			var that = this;	
 			
 			$.ajax({ // load sampler set
 		  		url: 'http://api.soundcloud.com/resolve.json?url=https://soundcloud.com/burzinski/sets/'+ slug +'&client_id=9a6dee35d2554511e23c08291d16aad8',
   				dataType: "jsonp",
   				success: function(data) {
   				  				
-  					_.each(data.tracks, function(res){
+  					var i = 0;
+  					var lng = data.tracks.length
+  					
+  					for( ; i < lng ; i++ ){
 
   						that.playerCollection.add({
-  							songid: res.id,
-  							ttl: 	res.title
+  							songid: data.tracks[i].id,
+  							ttl: 	data.tracks[i].title
   						}); 
-
-  					});
+  						
+  					}
   					
-  					that.model =	_.first(that.playerCollection.models);				
+  					that.model = that.playerCollection.models[0];				
 					that.render();
 
  				}
@@ -128,8 +131,9 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 		'reloadTracklist': function(){
 			
 			if(this.songPlayed){
-				$("section .album").find("a[data-songid!=" + this.model.get('songid') + "]").removeClass('active');
-				$("section .album").find("a[data-songid=" + this.model.get('songid') + "]").addClass('active');	
+				var songid = this.model.get('songid');
+				$("section .album").find("a[data-songid!=" + songid + "]").removeClass('active');
+				$("section .album").find("a[data-songid=" + songid + "]").addClass('active');	
 			}
 		},
 		

@@ -19,7 +19,7 @@
 
 	<?php wp_footer(); /* this is used by many Wordpress features and plugins to work proporly */ ?>
 
-	<script data-main="/wp-content/themes/burzinski-backbone/js/main" src="/wp-content/themes/burzinski-backbone/js/require-jquery.js"></script>
+	<script data-main="/wp-content/themes/burzinski-backbone/js/main" src="/wp-content/themes/burzinski-backbone/js/require.js"></script>
 
 
 <!-- Start of StatCounter Code -->

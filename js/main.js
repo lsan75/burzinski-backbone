@@ -1,9 +1,17 @@
 // This set's up the module paths for underscore and backbone
 require.config({ 
     'paths': { 
-		'underscore': 	'libs/underscore-min', 
+    	'jquery':		[	'//code.jquery.com/jquery-latest.min',	
+    						'libs/jquery.min'
+    					],
+		'underscore': 	[	
+							'//cdn.jsdelivr.net/underscorejs/1.4.3/underscore-min',
+							'libs/underscore-min'
+						],	
+		'backbone': 	[	'//cdn.jsdelivr.net/backbonejs/0.9.10/backbone-min',
+							'libs/backbone-min'
+						],	
 		'mixins':		'libs/mixins',
-		'backbone': 	'libs/backbone-min',
 		'SC': 			'libs/soundcloud-sdk.unminified',
 		'validate': 	'libs/jquery.validate.min'
 	},
@@ -30,6 +38,7 @@ require.config({
 }); 
 
 require([
+	'jquery',
 	'underscore',
 	'mixins',
 	'backbone',
@@ -37,7 +46,7 @@ require([
 	'SC',
 	'validate'
 	], 
-	function(_, mixins, Backbone, app, SC, validate){
+	function($, _, mixins, Backbone, app, SC, validate){
 		app.init();
 		Backbone.history.start();		
 });

@@ -15,24 +15,26 @@ function($, Backbone, _, template, GalleryCollection){
 			this.collection	= new GalleryCollection;
 			
 		},
+
+		events:{
+			'click a': function(e) { this.manageGallery(e.currentTarget); }
+		},
 		
 		'render': function(){
-		
-			var that = this;
-		
-  			_.each(this.imgs, function(res){
+				
+			var i = 0;
+			var lng = this.imgs.length;
+  			for ( ; i < lng ; i++){
   			
-  				that.collection.add({
-  					img: res.replace(/.jpg/g,'-150x150.jpg')
+  				this.collection.add({
+  					img: this.imgs[i].replace(/.jpg/g,'-150x150.jpg')
   				});	
   					
-  			});
+  			}
 
 			this.template = _.template( template, {collection: this.collection.toJSON() });
 			
-			$(this.el)
-				.html(this.template)
-				.find('a').click(function(){ that.manageGallery(this) });
+			$(this.el).html(this.template);
 			
 			return true;
 			
@@ -47,7 +49,6 @@ function($, Backbone, _, template, GalleryCollection){
 			});
 			
 		}
-
 
 	});
 	

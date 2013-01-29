@@ -9,74 +9,64 @@ function($, Backbone, _, template, socialbuttons, contactform){
 	var PageView = Backbone.View.extend({
 		
 		'initialize': function(options){
-			_.bindAll(this, 'getPage', 'render', 'setContactForm');
+			_.bindAll(this, 'render', 'setContactForm');
 			
-			this.erreur = false;
 			this.slug = options.slug;
 		
 		},
 		
-		'getPage': function(){
-		
-			var that = this;
+		'render': function(dfd){
+
+			var data = this.collection.where({slug: this.slug})[0];
 			
-			return $.ajax({ // get page
-  				url: '/api/get_page?slug='+this.slug+'&custom_fields=image',
-  				dataType: "json",
-  				success: function(data) {
-  				  			
-  					if(data.status !=='error' ){ 					
-						$.when(that.render(data.page)).done(function(){
-							return true;
-						});
-					}
-					
-  				}
-  				
-  			});	
-  			
-		},
-		
-		'render': function(data){
-						
-  			var img = (data.custom_fields.image)?'/wp-content/uploads/'+data.custom_fields.image:'/wp-content/themes/burzinski-backbone/img/blank.gif';
-    		var cnt = data.content;
-    		var ttl = data.title;
-    		var ids = data.slug+'-content';
-			var ida = data.slug+'-id';	
-			var url = '/#!/page/'+data.slug;
+			if(!data){
+			
+				return dfd.reject(); // not found
+			
+			}else{		
 
-			_.metaFB({
-				ttl: ttl,
-				url: url,
-				img: img
-			});		
+				var slug = data.get('slug');
+				var	cnt = data.get('cnt');
+				var	ttl = data.get('ttl');
+				var	img = data.get('img');
+	    		var ids = slug+'-content';
+				var ida = slug+'-id';	
+				var url = '/#!/page/'+slug;
+
+				_.metaFB({
+					ttl: ttl,
+					url: url,
+					img: img
+				});			
 
 
-			var _json = {
-				img: img,
-				cnt: cnt,
-				ttl: ttl,
-				ids: ids,
-				ida: ida,
-				url: url
-			};										
+				var _json = {
+					img: img,
+					cnt: cnt,
+					ttl: ttl,
+					ids: ids,
+					ida: ida,
+					url: url
+				};	
 										  			
-  			// main template
-  			$('body header').after( _.template( template, { model: _json } ) );
+	  			// main template
+  					$('body header').after( _.template( template, { model: _json } ) );
   			
-  			// social buttons
-  			$('#'+ida).find('footer').append( _.template( socialbuttons, { model: _json }) );	
+  				// social buttons
+  				$('#'+ida).find('footer').append( _.template( socialbuttons, { model: _json }) );	
   			
-  			// contact form
-  			if(data.slug === 'contact'){
-  				$('#'+ida).find('footer').before( _.template( contactform ) );
-  				this.setContactForm();		
-  			}
+  				// contact form
+	  			if(data.slug === 'contact'){
+  					$('#'+ida).find('footer').before( _.template( contactform ) );
+  					this.setContactForm();		
+  				}
   			
-			_(ida).refresh();
+				_(ida).refresh();
 			
-			return true;
+				return dfd.resolve();
+			
+			}										
+
 		},
 		
 		'setContactForm': function(){

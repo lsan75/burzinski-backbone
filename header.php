@@ -6,14 +6,14 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" lang="en"><!--<![endif]-->
 
 <head profile="http://gmpg.org/xfn/11>
-	<title><?php wp_title( '-', true, 'right' ); echo wp_specialchars( get_bloginfo('name'), 1 ) ?></title>
-	<meta charset="<?php bloginfo('charset') ?>">
+	<title>Burzinski Music</title>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0" />
-	<meta name="identifier-url" content="<?php bloginfo('home') ?>">
+	<meta name="identifier-url" content="http://www.burzinskimusic.com">
 	<meta name="category" content="Music, Artist">
 	<meta name="copyright" content="burzinski 2011">
 	<meta name="owner" content="burzinski">	
-	<!--<link rel="shortcut icon" href="/bz-img/" />-->
+	<link rel="shortcut icon" href="/wp-content/themes/burzinski-backbone/img/favicon.gif" />
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<link href="<?php bloginfo('home') ?>/wp-content/themes/burzinski-backbone/styles-ie.css" rel="stylesheet" type="text/css" />
@@ -24,19 +24,18 @@
 
 
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('rss2_url') ?>" title="<?php printf( __( '%s latest posts', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>">
+	<!--
 	<link rel="alternate" type="application/rss+xml" href="<?php bloginfo('comments_rss2_url') ?>" title="<?php printf( __( '%s latest comments', 'sandbox' ), wp_specialchars( get_bloginfo('name'), 1 ) ) ?>">
 	<link rel="pingback" href="<?php bloginfo('pingback_url') ?>">
-
+	-->
 	<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); /* Threaded comments */?>
 	<?php wp_head() /* For plugins */?>
 
-	<meta name="alexaVerifyID" content="N4jzXOc5fsH2SDL7jUCqoNAj3AM">
-
-	<meta property="og:type" content="article">
-	<meta property="og:title" content="Burzinski website">
-	<meta property="og:site_name" content="Burzinski">
-	<meta property="og:description" content="burzinski indie music, useless, untimely tales, alternative, post-punk, cold wave">
-	<meta property="og:image" content="<?php bloginfo('home') ?>/wp-content/uploads/burzinski-real-logo.jpg">
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Burzinski website" />
+	<meta property="og:site_name" content="Burzinski" />
+	<meta property="og:description" content="burzinski indie music, useless, untimely tales, alternative, post-punk, cold wave" />
+	<meta property="og:image" content="http://www.burzinskimusic.com/wp-content/uploads/burzinski-real-logo.jpg" />
 
 	<meta property="fb:admins" content="80233673887" />
 
@@ -117,6 +116,9 @@
 				</div>
 			
 			</nav>
+
+			<div id="ajax-loader">&nbsp;</div>
 	
 		</header>
+		
 
