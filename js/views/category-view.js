@@ -68,7 +68,10 @@ function($, Backbone, _, PostView){
 	        {
 				$(window).unbind('scroll', this.isNewPage); // unbind if scrolled again
 	        	this.currentPage++;
-	            $.when(this.render()).done(function(){ // get next page
+	        	
+	        	var dfd = $.Deferred();
+	        	dfd.promise();
+	            $.when(this.render(dfd)).done(function(){ // get next page
 	            	$(window).bind('scroll', that.isNewPage); // bind again after render
 	            });	
 

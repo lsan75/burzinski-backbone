@@ -1,12 +1,12 @@
 /*
 Theme Name: Burzinski Backbone
 Theme URI: http://www.burzinskimusic.com
-Author: Burzinski
-Author URI: http://www.burzinskimusic.com
+Author: Octobre Insolite
+Author URI: http://www.octobreinsolite.com
 Description: Burzinski official website
 Version: 3
-License: copyright 2012 burzinski
-License URI: Octobre Insolite
+License: copyright 2013 Octobre Insolite
+License URI: http://www.octobreinsolite.com
 Tags: responsive backbone soundmanager soundcloud json-api one-page
 */
 
@@ -130,7 +130,7 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 			background-position: 10px -10px;
 		}	
 					
-		.submenu aside input#email 	{ width: 49%;  }
+		.submenu aside input#email 	{ width: 47%;  }
 		.submenu aside input 		{ padding: 5px 10px; margin-left: 10px; }
 
 		.menu {
@@ -288,6 +288,7 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 			border-radius: 10px;
 			padding: 10px 0;
 			text-align: left;
+			
 		}
 		.submenu aside label {
 			display: inline-block;
@@ -421,6 +422,12 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 		}
 		.album a.active, .album a:hover { text-decoration: underline; }
 		
+	/* facebook comments */
+	article .fb-comments, article .fb-comments * {width: 100% !important; margin: 0; float: none !important; }
+		
+	.nbcomments { float: right; }
+	.fb-comments-count { text-decoration: underline; color:#333; }
+
 	/* social media buttons */
 		article footer .twitter-button{
 			float: left;
@@ -436,13 +443,19 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 		article footer .nbcomments { text-decoration: underline; }
 		article footer .fb { margin:0 0 3.2em; width: 100%; }
 		article footer .fb div { width: auto; }
-	/* facebook comments */
-	article .fb-comments, article .fb-comments * {width: 100% !important; margin: 0; }	
-	.nbcomments { float: right; }
-	.fb-comments-count { text-decoration: underline; color:#333; }
 	
 	#ajax-loader {
 		background: url(img/ajax-loader.gif) no-repeat center center;
 		height:32px;
 		width: 100%;
 	}
+	.bc{
+		margin:0 0 2em;
+		width: 100%;
+	}
+	.bc iframe{
+		position:relative;
+		z-index:1;
+		left: 50%;
+		margin-left:-75px;
+	}	

@@ -33,13 +33,6 @@ function($, Backbone, _, template, socialbuttons, contactform){
 				var ida = slug+'-id';	
 				var url = '/#!/page/'+slug;
 
-				_.metaFB({
-					ttl: ttl,
-					url: url,
-					img: img
-				});			
-
-
 				var _json = {
 					img: img,
 					cnt: cnt,
@@ -50,13 +43,19 @@ function($, Backbone, _, template, socialbuttons, contactform){
 				};	
 										  			
 	  			// main template
-  					$('body header').after( _.template( template, { model: _json } ) );
+  				$('body header').after( _.template( template, { model: _json } ) );
   			
   				// social buttons
-  				$('#'+ida).find('footer').append( _.template( socialbuttons, { model: _json }) );	
+				var _jsonfb = {
+					ttl: data.get('ttl'),
+					url: url,
+					urlfb: '/%23!/page/'+slug
+				};		
+
+  				$('#'+ida).find('footer').append( _.template( socialbuttons, { model: _jsonfb }) );	
   			
-  				// contact form
-	  			if(data.slug === 'contact'){
+  				// contact form  				
+	  			if(slug === 'contact'){
   					$('#'+ida).find('footer').before( _.template( contactform ) );
   					this.setContactForm();		
   				}

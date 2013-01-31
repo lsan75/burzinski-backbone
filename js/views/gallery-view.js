@@ -27,7 +27,7 @@ function($, Backbone, _, template, GalleryCollection){
   			for ( ; i < lng ; i++){
   			
   				this.collection.add({
-  					img: this.imgs[i].replace(/.jpg/g,'-150x150.jpg')
+  					img: this.imgs[i].replace(/.jpg/g,'-120x120.jpg')
   				});	
   					
   			}
@@ -42,7 +42,7 @@ function($, Backbone, _, template, GalleryCollection){
 		
 		'manageGallery': function(obj){ // set photo gallery
 			
-			var newImg = $(obj).find('img').attr('src').replace(/-150x150.jpg/g,'.jpg');
+			var newImg = $(obj).find('img').attr('src').replace(/-120x120.jpg/g,'.jpg');
 			
 			$(obj).parents('article').find('aside img').fadeOut(function(){
 				$(this).attr('src', newImg).fadeIn();

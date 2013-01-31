@@ -10,9 +10,13 @@ function($, Backbone, _, MainView){
 			'!/top': 'top', // scroll to top
 			'1': 'nada', // #1 pour click sur images et autres boutons
 			'': 'home',
+			
 			'!/category/:nom': 'gotoCategory',
+			
 			'!/page/:nom': 'gotoPage',
+			
 			'!/:category/post/:nom': 'gotoPost',
+			
 			'*actions': 'f404'
 			
 		},
@@ -37,7 +41,7 @@ function($, Backbone, _, MainView){
 			}else{
 				if( controle.length >= 6 && isFinite(controle[3]) ){ // ancien article du blog ?
 				
-					this.navigate('!/blog/post/'+controle[4], {trigger: true});
+					window.location.href = '/#!/blog/post/'+controle[4];
 				
 				}else{
 			

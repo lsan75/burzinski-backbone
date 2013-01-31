@@ -9,8 +9,10 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 	var PlayerView = Backbone.View.extend({
 		el: '#el-player',
 		'initialize': function(){
+			var that = this;
 		
-			_.bindAll(this, 'render', 'loadCollection', 'playSong', 'stopSong', 'nextSong', 'reloadTracklist');
+			_.bindAll(this, 'render', 'playSong', 'stopSong', 'nextSong', 'reloadTracklist', 'changeCollection');
+		
 			
 			try{
 				SC.initialize({client_id: "9a6dee35d2554511e23c08291d16aad8"});
@@ -21,8 +23,11 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 			this.soundcloud = false;		// soundcloud object	
 			this.songPlayed = false;		// song play status
 
-			this.playerCollection = new PlayerCollection; // default player
-			this.loadCollection('sampler');
+			this.playerCollection = new PlayerCollection(null, 'sampler'); // default player
+			$.when( this.playerCollection.loaded ).done(function(){
+			  	that.model = that.playerCollection.models[0];		
+				that.render();
+			});
 
 		},
 
@@ -32,59 +37,43 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 			'click a.player-next': function() { this.nextSong('next') }, 
 			'click a.player-prev': function() { this.nextSong('prev') }
 		},
-		
-		'loadCollection': function(slug){
-		
-			var that = this;	
-			
-			$.ajax({ // load sampler set
-		  		url: 'http://api.soundcloud.com/resolve.json?url=https://soundcloud.com/burzinski/sets/'+ slug +'&client_id=9a6dee35d2554511e23c08291d16aad8',
-  				dataType: "jsonp",
-  				success: function(data) {
-  				  				
-  					var i = 0;
-  					var lng = data.tracks.length
-  					
-  					for( ; i < lng ; i++ ){
-
-  						that.playerCollection.add({
-  							songid: data.tracks[i].id,
-  							ttl: 	data.tracks[i].title
-  						}); 
-  						
-  					}
-  					
-  					that.model = that.playerCollection.models[0];				
-					that.render();
-
- 				}
-			});	
-		
-		},
-		
+				
 		'changeCollection': function(collection, songid){ // play from tracklist
-						
-			if( Number(songid) !== this.model.get('songid'))
-			{
-				if(this.songPlayed){
-					this.soundcloud.stop();
-				}	
+
+			if(this.songPlayed){
+				this.soundcloud.stop();
+			}	
 			
-				var that = this;
-				this.playerCollection = collection;
+			this.playerCollection = collection;
 									
-				this.model = this.playerCollection.where({songid: Number(songid)})[0];
+			this.model = this.playerCollection.where({songid: Number(songid)})[0];
 			
-				$.when(this.render()).done(function(){
-					that.playSong();
-				});
-			}
+			this.render();
+			this.playSong();
+				
 		},
 		
 		'render': function(){
 			
 			var that = this;
 			var span = $(this.el).find('span');
+
+			try{	
+				SC.stream('/tracks/'+that.model.get('songid'), 
+					{
+						onfinish: function() {
+							that.nextSong('next');
+						}
+					},
+					function(snd){
+						that.soundcloud = snd;
+					}
+				);
+			}
+			catch(error){
+				that.soundcloud = false;
+				alert('soundcloud error ? reload ' +that.model.get('ttl'));			
+			}
 			
 			span.animate({
   				'opacity': '0'
@@ -95,37 +84,20 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
   				}, 200);
   			});
   			
-			return true;
 		},
 		
 		'playSong': function(){
-						
-			var that = this;
+										
+			if(this.soundcloud){
+
+				this.soundcloud.play();
+				this.songPlayed = true;		
+
+				_.swapClass($(this.el).find('.player-play'), 'player-stop');
 				
-			try{	
-								
-				SC.stream('/tracks/'+this.model.get('songid'), 
-				{
-					onfinish: function() {
-						that.nextSong('next');
-					}
-				},
-				function(snd){
-
-					that.soundcloud = snd;														
-					that.soundcloud.play();
-					that.songPlayed = true;		
-
-					_.swapClass($(that.el).find('.player-play'), 'player-stop');
-				
-					that.reloadTracklist();
-
-				});
-
+				this.reloadTracklist();
 			}
-			catch(erreur){
-				this.soundcloud = false;
-			}
+
 		},
 		
 		'reloadTracklist': function(){

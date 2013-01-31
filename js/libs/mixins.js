@@ -37,13 +37,6 @@ _.mixin({
   			
   		},
   		
-  		metaFB: function(options){
-  			var baseUrl = 'http://www.burzinskimusic.com';
-  			$('meta[property="og:title"]').attr('content', options.ttl);
-  			$('meta[property="og:image"]').attr('content', baseUrl+options.img);
-  			$('meta[name="identifier-url"]').attr('content', baseUrl+options.url);
-  		},
-  		
   		isiPhone: function(){
 			if (navigator && navigator.userAgent && navigator.userAgent != null) 
    			{

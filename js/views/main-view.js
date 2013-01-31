@@ -15,14 +15,9 @@ function($, Backbone, _, BlogCollection, PageCollection, MenuView, PlayerView, P
 		el: 'body',
 	
 		initialize: function(){
-			
-console.time('loading time');			
-											
+														
 			_.bindAll(this, 'produceView', 'doneView');
 			
-console.time('before_promise');
-console.time('after_promise');
-
 			// load async data
 			this.pageCollection = new PageCollection();
 			this.blogCollection = new BlogCollection();	

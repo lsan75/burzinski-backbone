@@ -10,8 +10,9 @@ define([
 		'text!templates/list.tpl',
 		'text!templates/videoslist.tpl',
 		'views/gallery-view',
-		'views/tracklist-view'], 
-function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticle, templateVideosArticle, templateList, templateVideosList, GalleryView, TracklistView){
+		'views/tracklist-view',
+		'collections/player-collection'], 
+function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticle, templateVideosArticle, templateList, templateVideosList, GalleryView, TracklistView, PlayerCollection){
 	var PostView = Backbone.View.extend({
 		'initialize': function(options){
 
@@ -24,7 +25,7 @@ function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticl
 			this.slug = options.slug;
 			this.player = options.player;
 			this.parent = options.parent;
-			
+						
 			// load template
 			if(this.id === 'post'){
 				this.templateFile = (this.type === 'videos') ? templateVideosArticle : templateArticle; 
@@ -62,13 +63,7 @@ function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticl
   					img = (rimg)?'/wp-content/uploads/'+rimg:'/wp-content/themes/burzinski-backbone/img/blank.gif';
     		
     			}
-					
-				_.metaFB({
-					ttl: res.get('title'),
-					url: '/#!/'+this.type+'/post/'+res.get('slug'),
-					img: img
-				});		
-										
+
 				var _json = {
 					img: img,
 					vid: media,
@@ -89,12 +84,18 @@ function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticl
 					$('#'+this.parent).append(this.template);
 				}
 
+				var _jsonfb = {
+					ttl: res.get('ttl'),
+					url: '/#!/'+this.type+'/post/'+res.get('slug'),
+					urlfb:'/%23!/'+this.type+'/post/'+res.get('slug')
+				};		
+
 	  			// social buttons
-  				$('#'+this.id+' footer').append( _.template( socialbuttons, { model: _json }) );	
+  				$('#'+this.id+' footer').append( _.template( socialbuttons, { model: _jsonfb }) );	
 				if(this.id === 'post'){
-					$('#'+this.id+' footer .fb').after( _.template( fbcomments, { model: _json }) );
+					$('#'+this.id+' footer .fb').after( _.template( fbcomments, { model: _jsonfb }) );
 				}else{
-					$('#'+this.id+' footer .fb').append( _.template( fbcommentsnb, { model: _json }) );
+					$('#'+this.id+' footer .fb').append( _.template( fbcommentsnb, { model: _jsonfb }) );
 				}
 
 				// add photo gallery 
@@ -109,17 +110,26 @@ function($, Backbone, _, socialbuttons, fbcomments, fbcommentsnb, templateArticl
 				// add music player
 				if( media && this.type === 'music'){ 
   					
-  					var	tracklist = new TracklistView ({
-  						'media': media, 
-  						'player': this.player
-  					});	
-  				
-  					$.when( tracklist.loadCollection() ).done(function(){
-						$('#'+that.id+' hgroup').after( tracklist.$el );
-						$('#'+that.id).promise().done(function(){ // set playing track in tracklist
-								that.player.reloadTracklist();
-						});
-					});	
+  					var tmpcollection = new PlayerCollection(null, media);
+	  				var dfdt = $.Deferred();
+  					dfdt.promise();
+  					
+  					$.when( tmpcollection.loaded ).done(function(){
+  					  					
+ 	 					var	tracklist = new TracklistView ({
+ 	 						collection: tmpcollection,
+  							'player': that.player
+  						});	
+  					  			
+  					  	$.when( tracklist.render(dfdt) ).done(function(){	
+  					  	  					  				
+							$('#'+that.id+' hgroup').after( tracklist.$el );
+							$('#'+that.id).promise().done(function(){ // set playing track in tracklist
+									that.player.reloadTracklist();
+							});
+						});	
+						
+					});				
   				}
 
   				if(this.id === 'post'){
