@@ -45,8 +45,7 @@ function($, Backbone, _, MainView){
 				
 				}else{
 			
-					this.f404();
-				
+					window.location.href = '/#!/page/404-error';
 				}	
 			}
 			
@@ -71,7 +70,7 @@ function($, Backbone, _, MainView){
 		},
 
 		'f404': function(){ // page 404
-			this.gotoPage('404-error');			
+			window.location.href = '/#!/page/404-error';		
 		},
 			
 		'nada': function(){ // si url est #1 ex click photo click player audio

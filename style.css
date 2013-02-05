@@ -96,7 +96,6 @@ Tags: responsive backbone soundmanager soundcloud json-api one-page
 		article div, .submenu div {
 			display: inline-block;
 			vertical-align: top;
-			overflow: hidden;
 		}
 		#ok:hover { cursor: pointer; }
 	/* fin std */

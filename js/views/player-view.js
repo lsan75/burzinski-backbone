@@ -78,8 +78,8 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 			span.animate({
   				'opacity': '0'
   			}, 200, function(){
-				span.html( that.model.get('ttl') );
-				span.animate({
+				span.html( that.model.get('ttl') )
+				 .animate({
   					'opacity': '1'
   				}, 200);
   			});

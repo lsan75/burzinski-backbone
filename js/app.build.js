@@ -18,13 +18,15 @@
 		'SC': 			'libs/soundcloud-sdk.unminified',
 		'validate': 	'libs/jquery.validate.min'
     },
-
+	mainConfigFile: 'main.js',
     modules: [
         {
             name: "require"
         },
         {
-            name: "main"
+            name: "main",
+            exclude:['jquery','backbone','underscore'],
+            include:['mixins','SC','validate']
         }
     ]
 })

@@ -10,7 +10,7 @@ define(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
 			var that = this;
 				
 			this.loaded = $.ajax({ // get page
-  				url: '/api/get_page_index?custom_fields=image&include=slug,content,title,custom_fields',
+  				url: '/api/get_page_index/?custom_fields=image&include=slug,content,title,custom_fields',
   				dataType: "json",
   				success: function(data) {
   				  		  				  		

@@ -10,9 +10,10 @@ _.mixin({
 		},
 		
 		swapClass: function(id, classe){
-		
-			$(id).fadeOut(100, function(){
-				$(id).attr('class', classe).fadeIn(100);
+			
+			var vid = $(id);
+			vid.fadeOut(100, function(){
+				vid.attr('class', classe).fadeIn(100);
 			});
 		
 		},

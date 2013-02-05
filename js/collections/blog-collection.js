@@ -10,7 +10,7 @@ define(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
 			var that = this;
 									
 			this.loaded = $.ajax({
-  				url: '/api/get_recent_posts?count=99999&custom_fields=url,image&include=custom_fields,slug,content,title,date,categories',
+  				url: '/api/get_recent_posts/?count=99999&custom_fields=url,image&include=custom_fields,slug,content,title,date,categories',
   				dataType: "json",
   				success: function(data) {
 

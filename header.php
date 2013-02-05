@@ -31,7 +31,7 @@
 
 	<meta property="og:url" content="<?php the_permalink() ?>" />
 	<meta property="og:type" content="article" />
-	<meta property="og:title" content="Burzinski website" />
+	<meta property="og:title" content="<?php echo get_the_title(); ?>" />
 	<meta property="og:site_name" content="Burzinski" />
 	<meta property="og:description" content="burzinski indie music, useless, untimely tales, alternative, post-punk, cold wave" />
 	<meta property="og:image" content="<?php echo catch_that_image() ?>" />
