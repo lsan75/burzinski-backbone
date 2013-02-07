@@ -72,7 +72,6 @@ function($, Backbone, _, PlayerCollection, playerTemplate){
 			}
 			catch(error){
 				that.soundcloud = false;
-				alert('soundcloud error ? reload ' +that.model.get('ttl'));			
 			}
 			
 			span.animate({

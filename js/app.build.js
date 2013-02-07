@@ -5,28 +5,25 @@
 
     appDir: "../",
     baseUrl: "js",
-    dir: "../burzinski-backbone-build/",
+    dir: "../../burzinski-backbone-build/",
     //Comment out the optimize line if you want
     //the code minified by UglifyJS
     optimize: "uglify",
-	findNestedDependencies:true,
     paths: {
-    	'jquery':		'empty:',	
-		'underscore': 	'empty:',
-		'backbone': 	'empty:',
+    	'jquery':		'libs/jquery.min',	
+		'underscore': 	'libs/underscore-min',
+		'backbone': 	'libs/backbone-min',
 		'mixins':		'libs/mixins',
 		'SC': 			'libs/soundcloud-sdk.unminified',
-		'validate': 	'libs/jquery.validate.min'
+		'validate': 	'libs/jquery.validate.min',
+		'datas':		'empty:'
     },
-	mainConfigFile: 'main.js',
     modules: [
         {
             name: "require"
         },
         {
-            name: "main",
-            exclude:['jquery','backbone','underscore'],
-            include:['mixins','SC','validate']
+            name: "main"
         }
     ]
 })

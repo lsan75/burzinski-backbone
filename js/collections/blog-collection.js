@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
+define(['jquery', 'backbone', 'underscore', 'datas'], function($, Backbone, _, datas){
 
 	var BlogModel = Backbone.Model.extend({
 	});
@@ -7,16 +7,40 @@ define(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
 		model: BlogModel,
 		initialize: function(){
 
+			var i, lng, that=this;
+
+			$.each( dataJson, function(key, value){
+				if(key!=='pages'){
+	  				i = 0;
+  					lng = value.length;
+  			  		for ( ; i < lng ; i++){
+
+  						that.add({
+  							slug: value[i]['post_name'],
+							img: value[i]['image'],
+							url: value[i]['url'],
+							cnt: value[i]['post_content'],
+							ttl: value[i]['post_title'],
+							dte: value[i]['post_date'],
+							cat: key
+  						}); 
+  				  	
+  				  	}
+  			  	}
+			});
+
+/*
+
 			var that = this;
 									
 			this.loaded = $.ajax({
-  				url: '/api/get_recent_posts/?count=99999&custom_fields=url,image&include=custom_fields,slug,content,title,date,categories',
+				url: '/api/get_recent_posts/?count=10000&custom_fields=url,image&include=custom_fields,slug,content,title,date,categories',
   				dataType: "json",
   				success: function(data) {
 
   				  	var i = 0;
   				  	var lng = data.posts.length;
-  				  	  				  	
+  				  	 				  	
   				  	for ( ; i < lng ; i++){
 
   						that.add({
@@ -30,13 +54,15 @@ define(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
   						}); 
   				  	
   				  	}
+  				  	
   				  	that.loaded.resolve;
   				}
   			});	
 			
 			this.loaded.promise();
-
+*/
 		}
+		
 	});
 	
 	return BlogCollection;

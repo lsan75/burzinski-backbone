@@ -55,26 +55,26 @@ function($, Backbone, _, BlogCollection, PageCollection, MenuView, PlayerView, P
 					switch(options.type){
 						case 'page':
 
-							$.when(that.pageCollection.loaded).done(function(){				
+							//$.when(that.pageCollection.loaded).done(function(){											
 								tempView = new PageView({collection: that.pageCollection,'slug': options.nom});
 								vfetch = tempView.render(vfetch);
-							});
+							//});
 							break;
 							
 						case 'category':
 										
-							$.when(that.blogCollection.loaded).done(function(){				
+							//$.when(that.blogCollection.loaded).done(function(){				
 								tempView = new CategoryView({collection: that.blogCollection,'slug': options.nom, 'player': that.playerView});
 								vfetch = tempView.render(vfetch);
-							});
+							//});
 							break;
 							
 						case 'post':
 							
-							$.when(that.blogCollection.loaded).done(function(){				
+							//$.when(that.blogCollection.loaded).done(function(){				
 								tempView = new PostView({collection: that.blogCollection, 'id': 'post', 'slug': options.nom, 'category': options.category, 'player': that.playerView});
 								vfetch = tempView.render(false, vfetch);
-							});
+							//});
 							break;
 					}		
 

@@ -35,13 +35,14 @@ function($, Backbone, _, PostView){
 				pg = [];
 				while ( p < 5 && i < lng){
 										
-					jlng = this.collection.models[i].attributes.cat.length;
-					for( j=0 ; j < jlng ; j++){				
-						if(this.collection.models[i].attributes.cat[j].slug === this.slug){
+				//	jlng = this.collection.models[i].attributes.cat.length;
+				//	for( j=0 ; j < jlng ; j++){				
+				//		if(this.collection.models[i].attributes.cat[j].slug === this.slug){
+						if(this.collection.models[i].attributes.cat === this.slug){
 							pg.push(this.collection.models[i]);
 							p++;
 						}
-					}
+				//	}
 					
 					i++;
 				}	
